@@ -2,18 +2,6 @@
 api.py - FastAPI prediction service for the Smart Ministry Platform
 Ministry of Digital Transition and Administration Reform - Morocco
 
-This service loads the artifacts produced by train_model.py (risk_model.joblib,
-preprocessor.joblib, label_encoder.joblib, feature_names.json) through the
-RiskExplainer class in shap_explainer.py, and exposes them over HTTP.
-
-IMPORTANT: this API deliberately does NOT use preprocess.py's DataPreprocessor.
-train_model.py has its own independent preprocessing (build_xy + ColumnTransformer,
-saved as preprocessor.joblib) -- that is what risk_model.joblib was actually trained
-on. RiskExplainer.preprocess_input() replicates that exact pipeline. Routing
-predictions through DataPreprocessor's separately-fit LabelEncoders/StandardScaler
-instead would silently feed the model a feature representation it has never seen,
-producing plausible-looking but meaningless predictions with no error raised.
-
 USAGE:
     uvicorn api:app --reload --port 8000
 
@@ -45,8 +33,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Dev-friendly CORS. Tighten allow_origins to your actual frontend origin(s) before
-# deploying (e.g. ["https://your-dashboard.gov.ma"]) rather than leaving it wide open.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -55,8 +41,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Loaded once at startup, reused across requests (this is why RiskExplainer's
-# prediction cache is bounded rather than a plain dict -- see shap_explainer.py).
 explainer: Optional[RiskExplainer] = None
 
 
@@ -67,8 +51,6 @@ def load_model():
         explainer = RiskExplainer(model_dir=str(MODEL_DIR), cache_size=256)
         logger.info("✅ RiskExplainer loaded and ready")
     except FileNotFoundError as e:
-        # Don't crash the whole process on startup if the model hasn't been trained
-        # yet -- surface a clear 503 on /predict instead, and let /health report it.
         logger.error(f"❌ Model artifacts not found: {e}")
         explainer = None
 
