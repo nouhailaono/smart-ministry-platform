@@ -1,19 +1,4 @@
-"""
-generate_synthetic_data.py - Digital Transformation Project Risk Dataset
-Creates a realistic synthetic dataset for Morocco's Ministry of Digital Transition
-and Administration Reform.
 
-FOCUS: Digital government projects, e-services, AI/ML implementations, and cloud infrastructure
-TARGET: Digital Project Success Risk prediction with rich feature set for SHAP explanations
-
-CHANGELOG (this version):
-  - Added scrum_maturity, chatbot_usage, funding_source generation (previously referenced
-    by train_model.py / shap_explainer.py but never actually produced -> dead features).
-  - scrum_maturity correlated with digital_skill_score / team capability.
-  - chatbot_usage correlated with ai_component and ai_type.
-  - funding_source is a plausible-but-independent categorical (no strong risk signal by
-    design, so it doesn't leak information through the back door).
-"""
 
 import numpy as np
 import pandas as pd
@@ -328,14 +313,6 @@ def generate_digital_transition_dataset(num_projects=10000, noise_std=3.5, seed=
         # Interoperability score
         interoperability_score = np.random.uniform(40, 100) * (0.7 + 0.3 * (1 - integration))
 
-        # ===============================
-        # NEW: Governance / dashboard-context features (previously referenced but
-        # never generated — added now with sensible correlations)
-        # ===============================
-
-        # Scrum maturity: correlated with digital skill + senior dev ratio, with noise.
-        # This is deliberately a *governance/process* signal, not wired strongly into
-        # risk_score below (kept mild) so it stays mostly a dashboard/context feature.
         senior_ratio = senior_developers / max(team_size, 1)
         scrum_propensity = 0.5 * (digital_skill_score / 100) + 0.5 * senior_ratio
         scrum_propensity += np.random.normal(0, 0.12)
@@ -346,8 +323,6 @@ def generate_digital_transition_dataset(num_projects=10000, noise_std=3.5, seed=
         else:
             scrum_maturity = 'Low'
 
-        # Chatbot usage: only meaningful when AI is involved (esp. Chatbot-type AI);
-        # otherwise low/near-zero usage.
         if ai_component == 'Yes' and ai_type == 'Chatbot':
             chatbot_usage = np.random.choice(['Low', 'Medium', 'High'], p=[0.15, 0.35, 0.50])
         elif ai_component == 'Yes':
@@ -358,9 +333,6 @@ def generate_digital_transition_dataset(num_projects=10000, noise_std=3.5, seed=
         # Funding source: independent categorical (procurement/governance context only)
         funding_source = np.random.choice(FUNDING_SOURCES, p=FUNDING_SOURCE_WEIGHTS)
 
-        # ===============================
-        # RISK SCORE (0-100) - Digital Transformation Focused
-        # ===============================
         risk_score_base = (
             0.15 * (complexity * 100) +
             0.12 * (integration * 100) +
