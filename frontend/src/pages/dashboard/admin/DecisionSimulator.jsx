@@ -32,6 +32,8 @@ import {
   FiAward,
   FiBarChart,
   FiHelpCircle,
+  FiArrowRight,
+  FiArrowLeft,
 } from "react-icons/fi";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 
@@ -109,7 +111,7 @@ const Tooltip = ({ children, content }) => {
 // ============================
 
 const FieldGroup = ({ title, icon: Icon, children }) => (
-  <div className="md:col-span-2">
+  <div className="md:col-span-2 animate-fadeIn">
     <h3 className="text-sm font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2 flex items-center gap-2">
       <Icon className="text-indigo-600" size={16} />
       {title}
@@ -135,6 +137,9 @@ export default function DecisionSimulator() {
   const [modelInfo, setModelInfo] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
   const [activeTooltip, setActiveTooltip] = useState(null);
+  
+  // Wizard Stepper State
+  const [formStep, setFormStep] = useState(0);
 
   const [scenario, setScenario] = useState({
     project_name: "",
@@ -218,6 +223,14 @@ export default function DecisionSimulator() {
   const [history, setHistory] = useState([]);
   const [activeTab, setActiveTab] = useState("input");
   const [whatIfChanges, setWhatIfChanges] = useState({});
+
+  // Wizard Steps Configuration
+  const steps = [
+    { label: "General & Finance", icon: FiHome },
+    { label: "Architecture & AI", icon: FiCloud },
+    { label: "Security & QA", icon: FiShield },
+    { label: "Governance & Citizen Impact", icon: FiUsers },
+  ];
 
   // ============================
   // EFFECTS
@@ -455,6 +468,7 @@ export default function DecisionSimulator() {
   const runSimulation = useCallback(async () => {
     if (!scenario.project_name) {
       setValidationErrors({ project_name: "Project name is required" });
+      setFormStep(0); // Jump back to General step
       return;
     }
 
@@ -517,7 +531,7 @@ export default function DecisionSimulator() {
     return (
       <div>
         <label className="text-xs font-medium text-slate-600 uppercase tracking-wider block mb-1.5">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 font-semibold">
             {label}
             {required && <span className="text-rose-500">*</span>}
             {tooltip && (
@@ -563,21 +577,61 @@ export default function DecisionSimulator() {
   // ============================
   
   const renderInputTab = () => (
-    <div className="grid lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2">
+    <div className="grid lg:grid-cols-3 gap-6 items-start relative">
+      {/* Left Columns - Stepper & Form Configuration */}
+      <div className="lg:col-span-2 space-y-4">
+        {/* Wizard Multi-Step Container */}
         <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-indigo-50 rounded-lg">
               <FiBookOpen className="text-indigo-600" size={20} />
             </div>
             <div>
               <h2 className="font-semibold text-lg text-slate-900">Project Configuration</h2>
-              <p className="text-sm text-slate-500">Enter project details for AI-powered risk assessment</p>
+              <p className="text-sm text-slate-500">Step-by-step setup for AI-powered risk assessment</p>
+            </div>
+          </div>
+
+          {/* Stepper Header */}
+          <div className="mb-8 relative">
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0 hidden md:block" />
+            <div className="relative flex justify-between items-center z-10 flex-wrap gap-4 md:gap-0">
+              {steps.map((step, idx) => {
+                const StepIcon = step.icon;
+                const isCompleted = idx < formStep;
+                const isActive = idx === formStep;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setFormStep(idx)}
+                    className="flex flex-col items-center group flex-1"
+                  >
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
+                        isCompleted
+                          ? "bg-indigo-600 border-indigo-600 text-white shadow-sm"
+                          : isActive
+                          ? "bg-white border-indigo-600 text-indigo-600 shadow-md scale-105"
+                          : "bg-white border-slate-200 text-slate-400 group-hover:border-slate-300"
+                      }`}
+                    >
+                      {isCompleted ? <FiCheckCircle size={18} /> : <StepIcon size={18} />}
+                    </div>
+                    <span
+                      className={`text-xs mt-2 font-medium transition-all text-center max-w-[100px] md:max-w-none ${
+                        isActive ? "text-indigo-600 font-bold" : "text-slate-400 group-hover:text-slate-600"
+                      }`}
+                    >
+                      {step.label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           {Object.keys(validationErrors).length > 0 && (
-            <div className="mb-4 p-4 bg-rose-50 border border-rose-200 rounded-lg">
+            <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-lg">
               <p className="text-sm font-medium text-rose-700 mb-1">Please fix the following errors:</p>
               <ul className="text-xs text-rose-600 list-disc list-inside">
                 {Object.entries(validationErrors).map(([field, error]) => (
@@ -587,192 +641,233 @@ export default function DecisionSimulator() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FieldGroup title="Project Information" icon={FiHome}>
-              {renderField("Project Name", "project_name", "text", null, 
-                "Unique identifier for your project. This helps track and reference the assessment.", true)}
-              {renderField("Ministry", "ministry", "text", [
-                "Digital Transition", "Health", "Education", "Interior", 
-                "Agriculture", "Equipment & Transport", "Water & Energy"
-              ], "Select the ministry responsible for this project.")}
-              {renderField("Project Type", "project_type", "text", [
-                "AI Chatbot", "Cloud Migration", "Digital Identity", "Open Data Platform",
-                "National Registry", "Tax Platform", "Customs System", "Smart City",
-                "Digital Platform", "Cloud Infrastructure", "Cybersecurity System"
-              ], "The primary category of digital transformation initiative.")}
-              {renderField("Region", "region", "text", [
-                "Casablanca-Settat", "Rabat-Salé-Kénitra", "Marrakech-Safi", 
-                "Fès-Meknès", "Tanger-Tétouan-Al Hoceïma"
-              ], "Geographic region where the project will be implemented.")}
-              {renderField("Province", "province", "text", null, 
-                "Specific province within the selected region.")}
-              {renderField("Strategic Importance", "strategic_importance", "text", [
-                "Low", "Medium", "High", "Critical"
-              ], "The strategic priority of this project within the ministry's portfolio.")}
-              {renderField("Project Priority", "project_priority", "text", [
-                "Low", "Medium", "High", "Critical"
-              ], "The internal priority level assigned to this project.")}
-            </FieldGroup>
+          {/* Step Contents */}
+          <div className="min-h-[380px]">
+            {formStep === 0 && (
+              <div className="space-y-6">
+                <FieldGroup title="Project Information" icon={FiHome}>
+                  {renderField("Project Name", "project_name", "text", null, 
+                    "Unique identifier for your project. This helps track and reference the assessment.", true)}
+                  {renderField("Ministry", "ministry", "text", [
+                    "Digital Transition", "Health", "Education", "Interior", 
+                    "Agriculture", "Equipment & Transport", "Water & Energy"
+                  ], "Select the ministry responsible for this project.")}
+                  {renderField("Project Type", "project_type", "text", [
+                    "AI Chatbot", "Cloud Migration", "Digital Identity", "Open Data Platform",
+                    "National Registry", "Tax Platform", "Customs System", "Smart City",
+                    "Digital Platform", "Cloud Infrastructure", "Cybersecurity System"
+                  ], "The primary category of digital transformation initiative.")}
+                  {renderField("Region", "region", "text", [
+                    "Casablanca-Settat", "Rabat-Salé-Kénitra", "Marrakech-Safi", 
+                    "Fès-Meknès", "Tanger-Tétouan-Al Hoceïma"
+                  ], "Geographic region where the project will be implemented.")}
+                  {renderField("Province", "province", "text", null, 
+                    "Specific province within the selected region.")}
+                  {renderField("Strategic Importance", "strategic_importance", "text", [
+                    "Low", "Medium", "High", "Critical"
+                  ], "The strategic priority of this project within the ministry's portfolio.")}
+                  {renderField("Project Priority", "project_priority", "text", [
+                    "Low", "Medium", "High", "Critical"
+                  ], "The internal priority level assigned to this project.")}
+                </FieldGroup>
 
-            <FieldGroup title="Financial Parameters" icon={FiDollarSign}>
-              {renderField("Budget (MAD)", "planned_budget_mad", "number", null, 
-                "Total planned budget for the project in Moroccan Dirhams. This is a key risk factor.", true)}
-              {renderField("Budget Sufficiency", "budget_sufficiency", "number", null, 
-                "The adequacy of the planned budget (0-1). 1.0 means fully sufficient, lower values indicate potential funding gaps.", true)}
-              {renderField("Duration (Days)", "planned_duration_days", "number", null, 
-                "Expected project duration in calendar days. Longer projects typically carry higher risk.", true)}
-              {renderField("Funding Source", "funding_source", "text", [
-                "National Budget", "International Grant", "Public-Private Partnership", "Mixed"
-              ], "The primary funding mechanism for the project.")}
-              {renderField("Procurement Method", "procurement_method", "text", [
-                "International Tender", "National Tender", "Direct Award", "Framework Agreement"
-              ], "The procurement approach used for vendor selection.")}
-            </FieldGroup>
+                <FieldGroup title="Financial Parameters" icon={FiDollarSign}>
+                  {renderField("Budget (MAD)", "planned_budget_mad", "number", null, 
+                    "Total planned budget for the project in Moroccan Dirhams. This is a key risk factor.", true)}
+                  {renderField("Budget Sufficiency", "budget_sufficiency", "number", null, 
+                    "The adequacy of the planned budget (0-1). 1.0 means fully sufficient, lower values indicate potential funding gaps.", true)}
+                  {renderField("Duration (Days)", "planned_duration_days", "number", null, 
+                    "Expected project duration in calendar days. Longer projects typically carry higher risk.", true)}
+                  {renderField("Funding Source", "funding_source", "text", [
+                    "National Budget", "International Grant", "Public-Private Partnership", "Mixed"
+                  ], "The primary funding mechanism for the project.")}
+                  {renderField("Procurement Method", "procurement_method", "text", [
+                    "International Tender", "National Tender", "Direct Award", "Framework Agreement"
+                  ], "The procurement approach used for vendor selection.")}
+                </FieldGroup>
+              </div>
+            )}
 
-            <FieldGroup title="Technical Assessment" icon={FiCloud}>
-              {renderField("Cloud Provider", "cloud_provider", "text", [
-                "AWS", "Azure", "GCP", "Hybrid", "On-Premise"
-              ], "The cloud infrastructure platform selected for the project.")}
-              {renderField("Software Complexity", "software_complexity", "text", [
-                "Low", "Medium", "High", "Very High"
-              ], "The technical complexity of the software being developed or implemented.")}
-              {renderField("Integration Complexity", "integration_complexity", "text", [
-                "Low", "Medium", "High", "Very High"
-              ], "The difficulty of integrating with existing systems and third-party services.")}
-              {renderField("API Count", "api_count", "number", null, 
-                "Number of APIs that need to be developed or integrated. Higher counts increase complexity.")}
-              {renderField("Legacy Systems", "legacy_systems", "number", null, 
-                "Number of existing legacy systems that need to be integrated or replaced.")}
-              {renderField("Interoperability Score", "interoperability_score", "number", null, 
-                "A score (0-100) indicating how well the project will integrate with existing infrastructure.")}
-              {renderField("Microservices", "microservices", "text", [
-                "Yes", "No"
-              ], "Whether the solution uses a microservices architecture.")}
-              {renderField("Backend Framework", "backend_framework", "text", null, 
-                "The primary backend development framework being used.")}
-            </FieldGroup>
+            {formStep === 1 && (
+              <div className="space-y-6">
+                <FieldGroup title="Technical Assessment" icon={FiCloud}>
+                  {renderField("Cloud Provider", "cloud_provider", "text", [
+                    "AWS", "Azure", "GCP", "Hybrid", "On-Premise"
+                  ], "The cloud infrastructure platform selected for the project.")}
+                  {renderField("Software Complexity", "software_complexity", "text", [
+                    "Low", "Medium", "High", "Very High"
+                  ], "The technical complexity of the software being developed or implemented.")}
+                  {renderField("Integration Complexity", "integration_complexity", "text", [
+                    "Low", "Medium", "High", "Very High"
+                  ], "The difficulty of integrating with existing systems and third-party services.")}
+                  {renderField("API Count", "api_count", "number", null, 
+                    "Number of APIs that need to be developed or integrated. Higher counts increase complexity.")}
+                  {renderField("Legacy Systems", "legacy_systems", "number", null, 
+                    "Number of existing legacy systems that need to be integrated or replaced.")}
+                  {renderField("Interoperability Score", "interoperability_score", "number", null, 
+                    "A score (0-100) indicating how well the project will integrate with existing infrastructure.")}
+                  {renderField("Microservices", "microservices", "text", [
+                    "Yes", "No"
+                  ], "Whether the solution uses a microservices architecture.")}
+                  {renderField("Backend Framework", "backend_framework", "text", null, 
+                    "The primary backend development framework being used.")}
+                </FieldGroup>
 
-            <FieldGroup title="Artificial Intelligence" icon={FiCpu}>
-              {renderField("AI Component", "ai_component", "text", [
-                "Yes", "No"
-              ], "Whether the project includes artificial intelligence or machine learning capabilities.")}
-              {scenario.ai_component === "Yes" && (
-                <>
-                  {renderField("AI Type", "ai_type", "text", [
-                    "Chatbot", "NLP", "Computer Vision", "Recommendation", 
-                    "Decision Support", "Predictive Analytics"
-                  ], "The specific type of AI technology being implemented.")}
-                  {renderField("AI Maturity", "ai_maturity", "number", null, 
-                    "The maturity level of the AI solution (0-1). Higher values indicate more proven technology.")}
-                </>
-              )}
-            </FieldGroup>
+                <FieldGroup title="Artificial Intelligence" icon={FiCpu}>
+                  {renderField("AI Component", "ai_component", "text", [
+                    "Yes", "No"
+                  ], "Whether the project includes artificial intelligence or machine learning capabilities.")}
+                  {scenario.ai_component === "Yes" && (
+                    <>
+                      {renderField("AI Type", "ai_type", "text", [
+                        "Chatbot", "NLP", "Computer Vision", "Recommendation", 
+                        "Decision Support", "Predictive Analytics"
+                      ], "The specific type of AI technology being implemented.")}
+                      {renderField("AI Maturity", "ai_maturity", "number", null, 
+                        "The maturity level of the AI solution (0-1). Higher values indicate more proven technology.")}
+                    </>
+                  )}
+                </FieldGroup>
+              </div>
+            )}
 
-            <FieldGroup title="Security & Compliance" icon={FiShield}>
-              {renderField("Cybersecurity Level", "cybersecurity_level", "text", [
-                "Low", "Medium", "High", "Critical"
-              ], "The required cybersecurity posture for the project.")}
-              {renderField("Encryption Level", "encryption_level", "text", [
-                "None", "Basic", "Strong", "Military Grade"
-              ], "The encryption standard applied to data at rest and in transit.")}
-              {renderField("GDPR Compliance", "gdpr_compliance", "text", [
-                "Yes", "No"
-              ], "Whether the solution complies with GDPR data protection requirements.")}
-              {renderField("ISO27001", "iso27001", "text", [
-                "Yes", "No"
-              ], "Whether the project follows ISO27001 information security management standards.")}
-              {renderField("Penetration Testing", "penetration_testing", "text", [
-                "Yes", "No"
-              ], "Whether security penetration testing has been conducted.")}
-              {renderField("Security Audit Score", "security_audit_score", "number", null, 
-                "A score (0-100) from security audits. Higher scores indicate better security posture.")}
-              {renderField("Vulnerabilities Found", "vulnerabilities_found", "number", null, 
-                "Number of security vulnerabilities identified during assessment.")}
-            </FieldGroup>
+            {formStep === 2 && (
+              <div className="space-y-6">
+                <FieldGroup title="Security & Compliance" icon={FiShield}>
+                  {renderField("Cybersecurity Level", "cybersecurity_level", "text", [
+                    "Low", "Medium", "High", "Critical"
+                  ], "The required cybersecurity posture for the project.")}
+                  {renderField("Encryption Level", "encryption_level", "text", [
+                    "None", "Basic", "Strong", "Military Grade"
+                  ], "The encryption standard applied to data at rest and in transit.")}
+                  {renderField("GDPR Compliance", "gdpr_compliance", "text", [
+                    "Yes", "No"
+                  ], "Whether the solution complies with GDPR data protection requirements.")}
+                  {renderField("ISO27001", "iso27001", "text", [
+                    "Yes", "No"
+                  ], "Whether the project follows ISO27001 information security management standards.")}
+                  {renderField("Penetration Testing", "penetration_testing", "text", [
+                    "Yes", "No"
+                  ], "Whether security penetration testing has been conducted.")}
+                  {renderField("Security Audit Score", "security_audit_score", "number", null, 
+                    "A score (0-100) from security audits. Higher scores indicate better security posture.")}
+                  {renderField("Vulnerabilities Found", "vulnerabilities_found", "number", null, 
+                    "Number of security vulnerabilities identified during assessment.")}
+                </FieldGroup>
 
-            <FieldGroup title="Team & Governance" icon={FiUsers}>
-              {renderField("Team Size", "team_size", "number", null, 
-                "Total number of team members assigned to the project.", true)}
-              {renderField("Senior Developers", "senior_developers", "number", null, 
-                "Number of senior developers with 5+ years of experience on the team.")}
-              {renderField("Vendor Experience", "vendor_experience", "number", null, 
-                "The vendor's experience rating (1-5). Higher values indicate more experienced vendors.")}
-              {renderField("Digital Skill Score", "digital_skill_score", "number", null, 
-                "A score (0-100) measuring the team's digital capabilities.")}
-              {renderField("Staff Turnover", "staff_turnover", "number", null, 
-                "Annual staff turnover rate (0-1). Higher values indicate potential continuity risks.")}
-              {renderField("PM Experience (Years)", "project_manager_experience_years", "number", null, 
-                "Years of experience of the project manager.")}
-            </FieldGroup>
+                <FieldGroup title="Quality Assurance" icon={FiAward}>
+                  {renderField("Testing Coverage", "testing_coverage", "number", null, 
+                    "Percentage of code covered by automated tests (0-100). Higher is better.")}
+                  {renderField("Compliance Score", "compliance_score", "number", null, 
+                    "A score (0-100) measuring regulatory compliance.")}
+                  {renderField("Audit Findings", "audit_findings", "number", null, 
+                    "Number of issues identified during project audits.")}
+                  {renderField("Scrum Maturity", "scrum_maturity", "text", [
+                    "Low", "Medium", "High"
+                  ], "The team's maturity in using Scrum agile methodology.")}
+                  {renderField("User Training", "user_training", "number", null, 
+                    "A score (0-100) for user training and adoption readiness.")}
+                  {renderField("Digital Maturity", "digital_maturity", "number", null, 
+                    "The organization's digital maturity (0-1). Higher values indicate better digital readiness.")}
+                </FieldGroup>
+              </div>
+            )}
 
-            <FieldGroup title="Quality Assurance" icon={FiAward}>
-              {renderField("Testing Coverage", "testing_coverage", "number", null, 
-                "Percentage of code covered by automated tests (0-100). Higher is better.")}
-              {renderField("Compliance Score", "compliance_score", "number", null, 
-                "A score (0-100) measuring regulatory compliance.")}
-              {renderField("Audit Findings", "audit_findings", "number", null, 
-                "Number of issues identified during project audits.")}
-              {renderField("Scrum Maturity", "scrum_maturity", "text", [
-                "Low", "Medium", "High"
-              ], "The team's maturity in using Scrum agile methodology.")}
-              {renderField("User Training", "user_training", "number", null, 
-                "A score (0-100) for user training and adoption readiness.")}
-              {renderField("Digital Maturity", "digital_maturity", "number", null, 
-                "The organization's digital maturity (0-1). Higher values indicate better digital readiness.")}
-            </FieldGroup>
+            {formStep === 3 && (
+              <div className="space-y-6">
+                <FieldGroup title="Team & Governance" icon={FiUsers}>
+                  {renderField("Team Size", "team_size", "number", null, 
+                    "Total number of team members assigned to the project.", true)}
+                  {renderField("Senior Developers", "senior_developers", "number", null, 
+                    "Number of senior developers with 5+ years of experience on the team.")}
+                  {renderField("Vendor Experience", "vendor_experience", "number", null, 
+                    "The vendor's experience rating (1-5). Higher values indicate more experienced vendors.")}
+                  {renderField("Digital Skill Score", "digital_skill_score", "number", null, 
+                    "A score (0-100) measuring the team's digital capabilities.")}
+                  {renderField("Staff Turnover", "staff_turnover", "number", null, 
+                    "Annual staff turnover rate (0-1). Higher values indicate potential continuity risks.")}
+                  {renderField("PM Experience (Years)", "project_manager_experience_years", "number", null, 
+                    "Years of experience of the project manager.")}
+                </FieldGroup>
 
-            <FieldGroup title="Citizen Impact" icon={FiUsers}>
-              {renderField("Expected Users", "citizen_users", "number", null, 
-                "The number of citizens expected to use the service.", true)}
-              {renderField("Expected Transactions", "expected_transactions", "number", null, 
-                "The expected volume of transactions per year.", true)}
-              {renderField("Digital Adoption Rate", "digital_adoption_rate", "number", null, 
-                "The expected digital adoption rate (0-1) among target users.", true)}
-              {renderField("Citizen Complaints", "citizen_complaints", "number", null, 
-                "Number of complaints received during similar projects.")}
-              {renderField("System Availability Target", "system_availability_target", "number", null, 
-                "The target system availability percentage (e.g., 99.95). Higher values require more investment.")}
-            </FieldGroup>
-
-            <div className="md:col-span-2 flex gap-3 mt-4">
-              <button
-                onClick={runSimulation}
-                disabled={isLoading || !aiConnected}
-                className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 text-white rounded-lg px-6 py-3 font-medium transition-all flex items-center justify-center gap-2"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                    Analyzing Project...
-                  </>
-                ) : (
-                  <>
-                    <FiZap size={18} />
-                    Run Risk Assessment
-                  </>
-                )}
-              </button>
-              {!aiConnected && (
-                <button
-                  onClick={checkAIConnection}
-                  className="px-4 py-3 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-lg font-medium transition-all"
-                >
-                  <FiRefreshCw size={16} />
-                </button>
-              )}
-            </div>
-
-            {aiError && (
-              <div className="md:col-span-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-sm text-amber-700">{aiError}</p>
+                <FieldGroup title="Citizen Impact" icon={FiUsers}>
+                  {renderField("Expected Users", "citizen_users", "number", null, 
+                    "The number of citizens expected to use the service.", true)}
+                  {renderField("Expected Transactions", "expected_transactions", "number", null, 
+                    "The expected volume of transactions per year.", true)}
+                  {renderField("Digital Adoption Rate", "digital_adoption_rate", "number", null, 
+                    "The expected digital adoption rate (0-1) among target users.", true)}
+                  {renderField("Citizen Complaints", "citizen_complaints", "number", null, 
+                    "Number of complaints received during similar projects.")}
+                  {renderField("System Availability Target", "system_availability_target", "number", null, 
+                    "The target system availability percentage (e.g., 99.95). Higher values require more investment.")}
+                </FieldGroup>
               </div>
             )}
           </div>
+
+          {/* Stepper Navigation Buttons */}
+          <div className="flex justify-between items-center mt-8 pt-4 border-t border-slate-100">
+            <button
+              onClick={() => setFormStep((prev) => Math.max(0, prev - 1))}
+              disabled={formStep === 0}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm font-medium transition-all ${
+                formStep === 0
+                  ? "border-slate-100 text-slate-300 cursor-not-allowed"
+                  : "border-slate-200 text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              <FiArrowLeft size={16} /> Back
+            </button>
+
+            {formStep < steps.length - 1 ? (
+              <button
+                onClick={() => setFormStep((prev) => Math.min(steps.length - 1, prev + 1))}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-sm font-semibold transition-all"
+              >
+                Next <FiArrowRight size={16} />
+              </button>
+            ) : (
+              <div className="flex gap-2">
+                {!aiConnected && (
+                  <button
+                    onClick={checkAIConnection}
+                    className="px-4 py-3 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-lg font-medium transition-all"
+                  >
+                    <FiRefreshCw size={16} />
+                  </button>
+                )}
+                <button
+                  onClick={runSimulation}
+                  disabled={isLoading || !aiConnected}
+                  className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 text-white rounded-lg px-6 py-3 font-semibold transition-all flex items-center justify-center gap-2 text-sm shadow-sm"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+                      Analyzing Project...
+                    </>
+                  ) : (
+                    <>
+                      <FiZap size={18} />
+                      Run Risk Assessment
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {aiError && (
+            <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="text-sm text-amber-700">{aiError}</p>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Right Panel - Results Summary */}
-      <div className="space-y-4">
+      {/* Right Panel - Sticky Results Summary */}
+      <div className="space-y-4 lg:sticky lg:top-6 self-start">
         <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
           <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
             <FiServer className="text-indigo-600" size={18} />
@@ -799,7 +894,7 @@ export default function DecisionSimulator() {
         </div>
 
         {result && (
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-fadeIn">
             <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
               <FiTarget size={18} />
               Assessment Results
@@ -816,7 +911,7 @@ export default function DecisionSimulator() {
                     {result.prediction} Risk
                   </span>
                 </div>
-                <span className={`text-xs text-${getRiskColor(result.prediction)}-600`}>
+                <span className={`text-xs text-${getRiskColor(result.prediction)}-600 font-semibold`}>
                   XGBoost Prediction
                 </span>
               </div>
@@ -865,7 +960,7 @@ export default function DecisionSimulator() {
                 </div>
                 <div className="text-xs text-slate-600 mt-1">
                   {result.risk_probabilities && Object.entries(result.risk_probabilities).map(([level, prob]) => (
-                    <span key={level} className="mr-2">
+                    <span key={level} className="mr-2 inline-block">
                       {level}: {prob.toFixed(1)}%
                     </span>
                   ))}
@@ -875,28 +970,31 @@ export default function DecisionSimulator() {
 
             {result.top_features && result.top_features.length > 0 && (
               <div className="mb-4">
-                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Key Risk Drivers
                 </p>
                 <div className="space-y-1.5">
-                  {result.top_features.slice(0, 5).map((factor, idx) => (
-                    <div key={idx} className="flex items-center justify-between text-sm">
-                      <span className="text-slate-600 truncate max-w-[55%]">{factor.feature_label}</span>
-                      <div className="flex items-center gap-2">
-                        <span className={`text-xs font-medium ${factor.impact === 'supports' ? 'text-rose-600' : 'text-emerald-600'}`}>
-                          {factor.impact === 'supports' ? '↑ Increases Risk' : '↓ Reduces Risk'}
-                        </span>
-                        <span className="text-xs text-slate-400">({factor.shap_value.toFixed(3)})</span>
+                  {result.top_features.slice(0, 5).map((factor, idx) => {
+                    const isRiskIncrease = factor.impact === 'supports';
+                    return (
+                      <div key={idx} className="flex items-center justify-between text-sm">
+                        <span className="text-slate-600 truncate max-w-[55%]">{factor.feature_label}</span>
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs font-semibold ${isRiskIncrease ? 'text-rose-600' : 'text-emerald-600'}`}>
+                            {isRiskIncrease ? '↑ Increases Risk' : '↓ Reduces Risk'}
+                          </span>
+                          <span className="text-xs text-slate-400">({factor.shap_value.toFixed(3)})</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
 
             {result.recommendations && result.recommendations.length > 0 && (
               <div className="mt-3 p-3 bg-indigo-50 rounded-lg">
-                <p className="text-xs font-medium text-indigo-600 mb-2">Recommendations</p>
+                <p className="text-xs font-semibold text-indigo-600 mb-2">Recommendations</p>
                 <ul className="text-xs text-slate-700 space-y-1">
                   {result.recommendations.slice(0, 3).map((rec, idx) => (
                     <li key={idx} className="flex items-start gap-2">
@@ -974,25 +1072,28 @@ export default function DecisionSimulator() {
               SHAP Feature Importance
             </h3>
             <div className="space-y-3">
-              {result.risk_breakdown.map((item, idx) => (
-                <div key={idx}>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600">{item.feature}</span>
-                    <span className={`font-medium ${item.sign === '+' ? 'text-rose-600' : 'text-emerald-600'}`}>
-                      {item.sign}{item.percentage?.toFixed(1) || 0}% Impact
-                    </span>
+              {result.risk_breakdown.map((item, idx) => {
+                const isRiskIncrease = item.sign === '+';
+                return (
+                  <div key={idx}>
+                    <div className="flex justify-between text-sm items-center">
+                      <span className="text-slate-600">{item.feature}</span>
+                      <span className={`font-semibold ${isRiskIncrease ? 'text-rose-600' : 'text-emerald-600'}`}>
+                        {item.sign}{item.percentage?.toFixed(1) || 0}% {isRiskIncrease ? 'Risk Increase' : 'Risk Reduction'}
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-100 rounded-full h-2 mt-1">
+                      <div
+                        className={`h-2 rounded-full ${isRiskIncrease ? 'bg-rose-500' : 'bg-emerald-500'}`}
+                        style={{ width: `${Math.abs(item.percentage || 0)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="w-full bg-slate-100 rounded-full h-2">
-                    <div
-                      className={`h-2 rounded-full ${item.sign === '+' ? 'bg-rose-500' : 'bg-emerald-500'}`}
-                      style={{ width: `${Math.abs(item.percentage || 0)}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-            <p className="text-xs text-slate-400 mt-3">
-              Positive percentages indicate factors contributing to higher risk. Negative percentages reduce risk.
+            <p className="text-xs text-slate-400 mt-3 font-medium">
+              Positive percentages contribute directly to a higher Risk Prediction. Negative percentages support Risk Reduction.
             </p>
           </div>
         )}
@@ -1011,9 +1112,9 @@ export default function DecisionSimulator() {
                     <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">
                       {key.replace(/_/g, ' ')}
                     </p>
-                    <p className="text-sm font-medium text-slate-800 mt-1">{value.feature_label}</p>
+                    <p className="text-sm font-semibold text-slate-800 mt-1">{value.feature_label}</p>
                     <p className="text-xs text-slate-500">Value: {value.feature_value}</p>
-                    <p className={`text-xs font-medium ${value.impact === 'supports' ? 'text-rose-600' : 'text-emerald-600'}`}>
+                    <p className={`text-xs font-semibold mt-1 ${value.impact === 'supports' ? 'text-rose-600' : 'text-emerald-600'}`}>
                       {value.impact === 'supports' ? '↑ Increases Risk' : '↓ Reduces Risk'}
                     </p>
                   </div>
@@ -1042,7 +1143,7 @@ export default function DecisionSimulator() {
                     </span>
                     <span className="text-xs text-slate-400">{rec.feature}</span>
                   </div>
-                  <p className="text-sm font-medium text-slate-800">{rec.action}</p>
+                  <p className="text-sm font-semibold text-slate-800">{rec.action}</p>
                   <p className="text-xs text-slate-500 mt-1">{rec.details}</p>
                 </div>
               ))}
@@ -1061,7 +1162,7 @@ export default function DecisionSimulator() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">
+              <label className="text-xs font-semibold text-slate-500 block mb-1">
                 Testing Coverage ({scenario.testing_coverage}%)
               </label>
               <input
@@ -1079,7 +1180,7 @@ export default function DecisionSimulator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">
+              <label className="text-xs font-semibold text-slate-500 block mb-1">
                 Vendor Experience ({scenario.vendor_experience})
               </label>
               <input
@@ -1098,7 +1199,7 @@ export default function DecisionSimulator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">
+              <label className="text-xs font-semibold text-slate-500 block mb-1">
                 Digital Skills ({scenario.digital_skill_score}%)
               </label>
               <input
@@ -1116,7 +1217,7 @@ export default function DecisionSimulator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-500 block mb-1">
+              <label className="text-xs font-semibold text-slate-500 block mb-1">
                 Team Size ({scenario.team_size})
               </label>
               <input
@@ -1136,7 +1237,7 @@ export default function DecisionSimulator() {
 
           {Object.keys(whatIfChanges).length > 0 && (
             <div className="mt-4 p-3 bg-indigo-50 rounded-lg">
-              <p className="text-xs text-indigo-600 font-medium">
+              <p className="text-xs text-indigo-600 font-semibold">
                 What-If Analysis Applied - Updated Prediction: {result.prediction} Risk
               </p>
             </div>
@@ -1157,7 +1258,7 @@ export default function DecisionSimulator() {
           <FiClock size={18} />
           Assessment History
         </h3>
-        <span className="text-xs text-slate-400">
+        <span className="text-xs text-slate-400 font-medium">
           {history.length} assessments saved
         </span>
       </div>
@@ -1194,10 +1295,10 @@ export default function DecisionSimulator() {
                       {item.aiPrediction}
                     </span>
                   </td>
-                  <td className="py-3 text-sm font-medium text-emerald-600">
+                  <td className="py-3 text-sm font-semibold text-emerald-600">
                     {item.successRate?.toFixed(1) || 0}%
                   </td>
-                  <td className="py-3 text-sm font-medium text-slate-700">
+                  <td className="py-3 text-sm font-semibold text-slate-700">
                     {(item.confidence * 100).toFixed(1)}%
                   </td>
                   <td className="py-3">
@@ -1213,6 +1314,7 @@ export default function DecisionSimulator() {
                             planned_duration_days: item.duration,
                           });
                           setActiveTab("input");
+                          setFormStep(0); // Reset wizard back to first step on load
                         }}
                         className="text-indigo-500 hover:text-indigo-600 p-1.5 hover:bg-indigo-50 rounded-lg transition-all"
                         title="Load scenario"
@@ -1252,13 +1354,13 @@ export default function DecisionSimulator() {
       <div className="min-h-screen bg-slate-50/80 p-6">
         {/* AI Status Banner */}
         <div className={`mb-6 p-4 rounded-lg border ${aiConnected ? 'bg-emerald-50 border-emerald-200' : 'bg-amber-50 border-amber-200'}`}>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
               <div className={`p-1.5 rounded-full ${aiConnected ? 'bg-emerald-100' : 'bg-amber-100'}`}>
                 <FiServer className={aiConnected ? 'text-emerald-600' : 'text-amber-600'} size={18} />
               </div>
               <div>
-                <p className={`text-sm font-medium ${aiConnected ? 'text-emerald-700' : 'text-amber-700'}`}>
+                <p className={`text-sm font-semibold ${aiConnected ? 'text-emerald-700' : 'text-amber-700'}`}>
                   {aiConnected ? 'XGBoost Risk Engine Connected' : 'XGBoost Risk Engine Offline'}
                 </p>
                 {modelInfo && (
@@ -1273,7 +1375,7 @@ export default function DecisionSimulator() {
             </div>
             <button
               onClick={checkAIConnection}
-              className="text-xs bg-white px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-all"
+              className="text-xs bg-white px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-all font-medium text-slate-700"
             >
               <FiRefreshCw size={12} className="inline mr-1" /> Check Connection
             </button>
@@ -1301,7 +1403,7 @@ export default function DecisionSimulator() {
                       localStorage.removeItem("simulationHistory");
                     }
                   }}
-                  className="text-sm text-rose-600 hover:text-rose-700 px-4 py-2 rounded-lg hover:bg-rose-50 transition-all"
+                  className="text-sm font-semibold text-rose-600 hover:text-rose-700 px-4 py-2 rounded-lg hover:bg-rose-50 transition-all"
                 >
                   Clear History
                 </button>
@@ -1316,7 +1418,7 @@ export default function DecisionSimulator() {
             onClick={() => setActiveTab("input")}
             className={`px-4 py-2 text-sm font-medium transition-all ${
               activeTab === "input"
-                ? "text-indigo-600 border-b-2 border-indigo-600"
+                ? "text-indigo-600 border-b-2 border-indigo-600 font-semibold"
                 : "text-slate-500 hover:text-slate-700"
             }`}
           >
@@ -1326,7 +1428,7 @@ export default function DecisionSimulator() {
             onClick={() => setActiveTab("results")}
             className={`px-4 py-2 text-sm font-medium transition-all ${
               activeTab === "results"
-                ? "text-indigo-600 border-b-2 border-indigo-600"
+                ? "text-indigo-600 border-b-2 border-indigo-600 font-semibold"
                 : "text-slate-500 hover:text-slate-700"
             }`}
           >
@@ -1336,7 +1438,7 @@ export default function DecisionSimulator() {
             onClick={() => setActiveTab("history")}
             className={`px-4 py-2 text-sm font-medium transition-all ${
               activeTab === "history"
-                ? "text-indigo-600 border-b-2 border-indigo-600"
+                ? "text-indigo-600 border-b-2 border-indigo-600 font-semibold"
                 : "text-slate-500 hover:text-slate-700"
             }`}
           >
