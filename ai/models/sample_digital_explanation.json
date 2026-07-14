@@ -1,0 +1,1576 @@
+{
+  "prediction": "Low",
+  "risk_score": 0.1127651184797287,
+  "success_probability": 99.88723754882812,
+  "confidence": 91.81258082389832,
+  "risk_probabilities": {
+    "High": 0.11276511941105127,
+    "Low": 91.81258082389832,
+    "Medium": 8.074657618999481
+  },
+  "top_features": [
+    {
+      "feature": "digital_maturity_index",
+      "feature_label": "Digital Maturity Index",
+      "feature_value": "N/A",
+      "shap_value": 1.833882451057434,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "team_capability",
+      "feature_label": "Team Capability",
+      "feature_value": "N/A",
+      "shap_value": 0.9183447957038879,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "complexity_score",
+      "feature_label": "Complexity Score",
+      "feature_value": "N/A",
+      "shap_value": -0.7353724241256714,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_maturity",
+      "feature_label": "AI Maturity",
+      "feature_value": "0.70",
+      "shap_value": -0.6736008524894714,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "quality_score",
+      "feature_label": "Quality Score",
+      "feature_value": "N/A",
+      "shap_value": 0.5208168625831604,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_readiness",
+      "feature_label": "AI Readiness",
+      "feature_value": "N/A",
+      "shap_value": 0.47715136408805847,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "interoperability_score",
+      "feature_label": "Interoperability",
+      "feature_value": "85",
+      "shap_value": -0.27502503991127014,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "senior_developers",
+      "feature_label": "Senior Developers",
+      "feature_value": "18",
+      "shap_value": -0.23101025819778442,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_maturity",
+      "feature_label": "Digital Maturity",
+      "feature_value": "0.85",
+      "shap_value": 0.21673433482646942,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_skill_score",
+      "feature_label": "Digital Skills",
+      "feature_value": "84",
+      "shap_value": -0.20661261677742004,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    }
+  ],
+  "risk_breakdown": [
+    {
+      "feature": "Digital Maturity Index",
+      "value": 1.833882451057434,
+      "percentage": 30.12017885913304,
+      "sign": "+",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "Team Capability",
+      "value": 0.9183447957038879,
+      "percentage": 15.083142043812932,
+      "sign": "+",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "Complexity Score",
+      "value": -0.7353724241256714,
+      "percentage": 12.07795457662394,
+      "sign": "-",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "AI Maturity",
+      "value": -0.6736008524894714,
+      "percentage": 11.063401661839642,
+      "sign": "-",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "Quality Score",
+      "value": 0.5208168625831604,
+      "percentage": 8.554036298679874,
+      "sign": "+",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "AI Readiness",
+      "value": 0.47715136408805847,
+      "percentage": 7.8368624013631125,
+      "sign": "+",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "Interoperability",
+      "value": -0.27502503991127014,
+      "percentage": 4.517085262521128,
+      "sign": "-",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "Senior Developers",
+      "value": -0.23101025819778442,
+      "percentage": 3.7941746436363366,
+      "sign": "-",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "Digital Maturity",
+      "value": 0.21673433482646942,
+      "percentage": 3.5597030366501055,
+      "sign": "+",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "Digital Skills",
+      "value": -0.20661261677742004,
+      "percentage": 3.3934612157398867,
+      "sign": "-",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "High",
+      "action": "Implement upskilling initiatives",
+      "details": "Focus on critical skills gaps identified in assessment",
+      "feature": "Digital Skills"
+    }
+  ],
+  "full_explanation": [
+    {
+      "feature": "digital_maturity_index",
+      "feature_label": "Digital Maturity Index",
+      "feature_value": "N/A",
+      "shap_value": 1.833882451057434,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "team_capability",
+      "feature_label": "Team Capability",
+      "feature_value": "N/A",
+      "shap_value": 0.9183447957038879,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "complexity_score",
+      "feature_label": "Complexity Score",
+      "feature_value": "N/A",
+      "shap_value": -0.7353724241256714,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_maturity",
+      "feature_label": "AI Maturity",
+      "feature_value": "0.70",
+      "shap_value": -0.6736008524894714,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "quality_score",
+      "feature_label": "Quality Score",
+      "feature_value": "N/A",
+      "shap_value": 0.5208168625831604,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_readiness",
+      "feature_label": "AI Readiness",
+      "feature_value": "N/A",
+      "shap_value": 0.47715136408805847,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "interoperability_score",
+      "feature_label": "Interoperability",
+      "feature_value": "85",
+      "shap_value": -0.27502503991127014,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "senior_developers",
+      "feature_label": "Senior Developers",
+      "feature_value": "18",
+      "shap_value": -0.23101025819778442,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_maturity",
+      "feature_label": "Digital Maturity",
+      "feature_value": "0.85",
+      "shap_value": 0.21673433482646942,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_skill_score",
+      "feature_label": "Digital Skills",
+      "feature_value": "84",
+      "shap_value": -0.20661261677742004,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_component_No",
+      "feature_label": "AI Component: No AI",
+      "feature_value": "Yes",
+      "shap_value": -0.1430087387561798,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Digital Identity",
+      "feature_label": "digital_service_Digital Identity",
+      "feature_value": "N/A",
+      "shap_value": -0.13879947364330292,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_National Digital Identity",
+      "feature_label": "project_type_National Digital Identity",
+      "feature_value": "N/A",
+      "shap_value": -0.12187188118696213,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_type_Predictive Analytics",
+      "feature_label": "ai_type_Predictive Analytics",
+      "feature_value": "N/A",
+      "shap_value": -0.0958375483751297,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "system_availability_target",
+      "feature_label": "System Availability",
+      "feature_value": "99.95",
+      "shap_value": -0.08791806548833847,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "backend_framework_Spring Boot",
+      "feature_label": "backend_framework_Spring Boot",
+      "feature_value": "N/A",
+      "shap_value": -0.081525519490242,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "database_PostgreSQL",
+      "feature_label": "database_PostgreSQL",
+      "feature_value": "N/A",
+      "shap_value": 0.06443275511264801,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "budget_efficiency",
+      "feature_label": "Budget Efficiency",
+      "feature_value": "N/A",
+      "shap_value": -0.06327112764120102,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "microservices_No",
+      "feature_label": "Microservices: Monolithic",
+      "feature_value": "Yes",
+      "shap_value": -0.05234628915786743,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Smart Municipality Platform",
+      "feature_label": "project_type_Smart Municipality Platform",
+      "feature_value": "N/A",
+      "shap_value": 0.050573885440826416,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "testing_coverage",
+      "feature_label": "Testing Coverage",
+      "feature_value": "91",
+      "shap_value": -0.04877708852291107,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "cloud_provider_On-Premise",
+      "feature_label": "cloud_provider_On-Premise",
+      "feature_value": "N/A",
+      "shap_value": -0.04377471283078194,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "compliance_score",
+      "feature_label": "Compliance Score",
+      "feature_value": "96",
+      "shap_value": -0.035400889813899994,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "citizen_complaints",
+      "feature_label": "Citizen Complaints",
+      "feature_value": "3",
+      "shap_value": 0.03466475382447243,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "scrum_maturity_ordinal",
+      "feature_label": "Scrum Maturity",
+      "feature_value": "High",
+      "shap_value": -0.03392054885625839,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "citizen_users",
+      "feature_label": "Citizen Users",
+      "feature_value": "4000000",
+      "shap_value": 0.03334276005625725,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "integration_burden",
+      "feature_label": "Integration Burden",
+      "feature_value": "N/A",
+      "shap_value": 0.03173957020044327,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "planned_duration_days",
+      "feature_label": "Planned Duration",
+      "feature_value": "420",
+      "shap_value": 0.031651899218559265,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "project_type_AI Chatbot for Public Services",
+      "feature_label": "project_type_AI Chatbot for Public Services",
+      "feature_value": "N/A",
+      "shap_value": 0.03048884868621826,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "project_type_e-Government Portal",
+      "feature_label": "project_type_e-Government Portal",
+      "feature_value": "N/A",
+      "shap_value": 0.02765047363936901,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "api_count",
+      "feature_label": "API Count",
+      "feature_value": "34",
+      "shap_value": -0.027517173439264297,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "funding_source_Mixed",
+      "feature_label": "funding_source_Mixed",
+      "feature_value": "N/A",
+      "shap_value": 0.026677079498767853,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "user_training",
+      "feature_label": "User Training",
+      "feature_value": "82",
+      "shap_value": -0.02645549550652504,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "security_maturity",
+      "feature_label": "Security Maturity",
+      "feature_value": "N/A",
+      "shap_value": 0.026019731536507607,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Casablanca",
+      "feature_label": "province_Casablanca",
+      "feature_value": "N/A",
+      "shap_value": -0.026002511382102966,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "frontend_framework_React",
+      "feature_label": "frontend_framework_React",
+      "feature_value": "N/A",
+      "shap_value": -0.02595409005880356,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_component_Yes",
+      "feature_label": "AI Component: AI Enabled",
+      "feature_value": "Yes",
+      "shap_value": -0.02552301250398159,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Digital Education Platform",
+      "feature_label": "project_type_Digital Education Platform",
+      "feature_value": "N/A",
+      "shap_value": 0.02528846263885498,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "project_type_Smart Citizen Services Platform",
+      "feature_label": "project_type_Smart Citizen Services Platform",
+      "feature_value": "N/A",
+      "shap_value": 0.025233138352632523,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "backend_framework_Node.js",
+      "feature_label": "backend_framework: Node.js",
+      "feature_value": "Spring Boot",
+      "shap_value": -0.023047730326652527,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "team_size",
+      "feature_label": "Team Size",
+      "feature_value": "42",
+      "shap_value": -0.022750433534383774,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "audit_findings",
+      "feature_label": "Audit Findings",
+      "feature_value": "1",
+      "shap_value": -0.021783879026770592,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "vendor_experience",
+      "feature_label": "Vendor Experience",
+      "feature_value": "4.60",
+      "shap_value": -0.019878998398780823,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "cloud_provider_AWS",
+      "feature_label": "cloud_provider_AWS",
+      "feature_value": "N/A",
+      "shap_value": -0.017516115680336952,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Electronic Document Management",
+      "feature_label": "project_type_Electronic Document Management",
+      "feature_value": "N/A",
+      "shap_value": -0.01588815078139305,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Open Data Platform",
+      "feature_label": "project_type_Open Data Platform",
+      "feature_value": "N/A",
+      "shap_value": -0.015814822167158127,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "change_requests",
+      "feature_label": "Change Requests",
+      "feature_value": "5",
+      "shap_value": -0.015564589761197567,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "approval_delay_days",
+      "feature_label": "Approval Delay",
+      "feature_value": "12",
+      "shap_value": 0.014945464208722115,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "region_Casablanca-Settat",
+      "feature_label": "region_Casablanca-Settat",
+      "feature_value": "N/A",
+      "shap_value": 0.013381127268075943,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "citizen_engagement",
+      "feature_label": "Citizen Engagement",
+      "feature_value": "N/A",
+      "shap_value": -0.013368186540901661,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "iso27001_No",
+      "feature_label": "ISO27001: Not Certified",
+      "feature_value": "Yes",
+      "shap_value": -0.013319169171154499,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "encryption_level_Military Grade",
+      "feature_label": "encryption_level_Military Grade",
+      "feature_value": "N/A",
+      "shap_value": -0.013084584847092628,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Smart Agriculture Platform",
+      "feature_label": "project_type_Smart Agriculture Platform",
+      "feature_value": "N/A",
+      "shap_value": -0.011852877214550972,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "region_F\u00e8s-Mekn\u00e8s",
+      "feature_label": "region_F\u00e8s-Mekn\u00e8s",
+      "feature_value": "N/A",
+      "shap_value": 0.010953845456242561,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "funding_source_International Grant",
+      "feature_label": "funding_source_International Grant",
+      "feature_value": "N/A",
+      "shap_value": -0.01069797296077013,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "encryption_level_Strong",
+      "feature_label": "encryption_level_Strong",
+      "feature_value": "N/A",
+      "shap_value": -0.010540276765823364,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "region_Tanger-T\u00e9touan-Al Hoce\u00efma",
+      "feature_label": "region_Tanger-T\u00e9touan-Al Hoce\u00efma",
+      "feature_value": "N/A",
+      "shap_value": -0.010290923528373241,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Online Business Registration",
+      "feature_label": "project_type_Online Business Registration",
+      "feature_value": "N/A",
+      "shap_value": -0.010211408138275146,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "backend_framework_Django",
+      "feature_label": "backend_framework_Django",
+      "feature_value": "N/A",
+      "shap_value": 0.009449038654565811,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_adoption_rate",
+      "feature_label": "Digital Adoption",
+      "feature_value": "0.75",
+      "shap_value": -0.009261752478778362,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "legacy_systems",
+      "feature_label": "Legacy Systems",
+      "feature_value": "8",
+      "shap_value": -0.00922743696719408,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "strategic_importance_ordinal",
+      "feature_label": "Strategic Importance",
+      "feature_value": "Critical",
+      "shap_value": -0.009005025960505009,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Digital Procurement Platform",
+      "feature_label": "project_type_Digital Procurement Platform",
+      "feature_value": "N/A",
+      "shap_value": -0.008996735326945782,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "vulnerabilities_found",
+      "feature_label": "Vulnerabilities",
+      "feature_value": "2",
+      "shap_value": 0.008831261657178402,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_type_Computer Vision",
+      "feature_label": "ai_type_Computer Vision",
+      "feature_value": "N/A",
+      "shap_value": -0.008541330695152283,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "cloud_provider_Azure",
+      "feature_label": "cloud_provider_Azure",
+      "feature_value": "N/A",
+      "shap_value": -0.008532052859663963,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "region_Rabat-Sal\u00e9-K\u00e9nitra",
+      "feature_label": "region_Rabat-Sal\u00e9-K\u00e9nitra",
+      "feature_value": "N/A",
+      "shap_value": 0.008420568890869617,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "microservices_Yes",
+      "feature_label": "Microservices: Microservices",
+      "feature_value": "Yes",
+      "shap_value": -0.008417811244726181,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "total_delay_days",
+      "feature_label": "Total Delay",
+      "feature_value": "N/A",
+      "shap_value": 0.008141420781612396,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Larache",
+      "feature_label": "province_Larache",
+      "feature_value": "N/A",
+      "shap_value": -0.007993368431925774,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "encryption_level_Basic",
+      "feature_label": "encryption_level_Basic",
+      "feature_value": "N/A",
+      "shap_value": -0.007945355959236622,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "procurement_delay_days",
+      "feature_label": "Procurement Delay",
+      "feature_value": "18",
+      "shap_value": 0.007300857454538345,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "chatbot_usage_ordinal",
+      "feature_label": "Chatbot Usage",
+      "feature_value": "Medium",
+      "shap_value": 0.006810368970036507,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "staff_turnover",
+      "feature_label": "Staff Turnover",
+      "feature_value": "12.50",
+      "shap_value": 0.0065859463065862656,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "backend_framework_Laravel",
+      "feature_label": "backend_framework_Laravel",
+      "feature_value": "N/A",
+      "shap_value": -0.006460955366492271,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_priority_ordinal",
+      "feature_label": "Project Priority",
+      "feature_value": "High",
+      "shap_value": 0.006458756979554892,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "planned_budget_mad",
+      "feature_label": "Planned Budget",
+      "feature_value": "28000000",
+      "shap_value": -0.006332234013825655,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "gdpr_compliance_No",
+      "feature_label": "GDPR Compliance: Non-Compliant",
+      "feature_value": "Yes",
+      "shap_value": -0.005949581041932106,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "penetration_testing_No",
+      "feature_label": "Penetration Testing: Not Tested",
+      "feature_value": "Yes",
+      "shap_value": 0.0055749318562448025,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "cloud_provider_Oracle Cloud",
+      "feature_label": "cloud_provider_Oracle Cloud",
+      "feature_value": "N/A",
+      "shap_value": 0.005566402338445187,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "expected_transactions",
+      "feature_label": "expected_transactions",
+      "feature_value": "800000",
+      "shap_value": -0.005488184746354818,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "funding_source_National Budget",
+      "feature_label": "funding_source_National Budget",
+      "feature_value": "N/A",
+      "shap_value": 0.005417975597083569,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Sal\u00e9",
+      "feature_label": "province_Sal\u00e9",
+      "feature_value": "N/A",
+      "shap_value": 0.005190423224121332,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "project_type_Digital Signature System",
+      "feature_label": "project_type_Digital Signature System",
+      "feature_value": "N/A",
+      "shap_value": -0.005063083488494158,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Mekn\u00e8s",
+      "feature_label": "province_Mekn\u00e8s",
+      "feature_value": "N/A",
+      "shap_value": 0.004689708352088928,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_type_Chatbot",
+      "feature_label": "ai_type_Chatbot",
+      "feature_value": "N/A",
+      "shap_value": 0.0046345554292202,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_Data Analytics",
+      "feature_label": "digital_service_Data Analytics",
+      "feature_value": "N/A",
+      "shap_value": 0.004321208223700523,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "backend_framework_FastAPI",
+      "feature_label": "backend_framework_FastAPI",
+      "feature_value": "N/A",
+      "shap_value": 0.004289597272872925,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_type_nan",
+      "feature_label": "ai_type_nan",
+      "feature_value": "N/A",
+      "shap_value": -0.004111003130674362,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Mobile Services",
+      "feature_label": "digital_service_Mobile Services",
+      "feature_value": "N/A",
+      "shap_value": -0.0037032761611044407,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "funding_source_Public-Private Partnership",
+      "feature_label": "funding_source_Public-Private Partnership",
+      "feature_value": "N/A",
+      "shap_value": -0.003640778362751007,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Digital Health Records",
+      "feature_label": "project_type_Digital Health Records",
+      "feature_value": "N/A",
+      "shap_value": 0.0035814098082482815,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Mohammedia",
+      "feature_label": "province_Mohammedia",
+      "feature_value": "N/A",
+      "shap_value": -0.0034035167191177607,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Digital Signature",
+      "feature_label": "digital_service_Digital Signature",
+      "feature_value": "N/A",
+      "shap_value": 0.0029695371631532907,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "database_Oracle",
+      "feature_label": "database_Oracle",
+      "feature_value": "N/A",
+      "shap_value": -0.002937328303232789,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "database_MySQL",
+      "feature_label": "database_MySQL",
+      "feature_value": "N/A",
+      "shap_value": 0.0028936031740158796,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Safi",
+      "feature_label": "province_Safi",
+      "feature_value": "N/A",
+      "shap_value": 0.002746115904301405,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "region_Marrakech-Safi",
+      "feature_label": "region_Marrakech-Safi",
+      "feature_value": "N/A",
+      "shap_value": -0.002649246249347925,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Cloud Services",
+      "feature_label": "digital_service_Cloud Services",
+      "feature_value": "N/A",
+      "shap_value": -0.0025861028116196394,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Blockchain",
+      "feature_label": "digital_service_Blockchain",
+      "feature_value": "N/A",
+      "shap_value": -0.0025788366328924894,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Chichaoua",
+      "feature_label": "province_Chichaoua",
+      "feature_value": "N/A",
+      "shap_value": -0.002562154084444046,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Smart City",
+      "feature_label": "digital_service_Smart City",
+      "feature_value": "N/A",
+      "shap_value": -0.0024536987766623497,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_eGovernment",
+      "feature_label": "digital_service_eGovernment",
+      "feature_value": "N/A",
+      "shap_value": 0.0023916526697576046,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "encryption_level_nan",
+      "feature_label": "encryption_level_nan",
+      "feature_value": "N/A",
+      "shap_value": 0.0019470293773338199,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "cloud_provider_Google Cloud",
+      "feature_label": "cloud_provider_Google Cloud",
+      "feature_value": "N/A",
+      "shap_value": 0.001852261833846569,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_IoT",
+      "feature_label": "digital_service_IoT",
+      "feature_value": "N/A",
+      "shap_value": -0.0018484966130927205,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "penetration_testing_Yes",
+      "feature_label": "Penetration Testing: Tested",
+      "feature_value": "Yes",
+      "shap_value": 0.0016971114091575146,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Al Hoce\u00efma",
+      "feature_label": "province_Al Hoce\u00efma",
+      "feature_value": "N/A",
+      "shap_value": -0.0015847564209252596,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "frontend_framework_Angular",
+      "feature_label": "frontend_framework_Angular",
+      "feature_value": "N/A",
+      "shap_value": -0.0015715460758656263,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_T\u00e9touan",
+      "feature_label": "province_T\u00e9touan",
+      "feature_value": "N/A",
+      "shap_value": -0.001461261068470776,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Open Data",
+      "feature_label": "digital_service_Open Data",
+      "feature_value": "N/A",
+      "shap_value": 0.0014098966494202614,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Al Haouz",
+      "feature_label": "province_Al Haouz",
+      "feature_value": "N/A",
+      "shap_value": -0.0013768437784165144,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "integration_complexity_ordinal",
+      "feature_label": "Integration Complexity",
+      "feature_value": "High",
+      "shap_value": 0.001350263599306345,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "backend_framework_ASP.NET Core",
+      "feature_label": "backend_framework_ASP.NET Core",
+      "feature_value": "N/A",
+      "shap_value": -0.0013367091305553913,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_National Data Center",
+      "feature_label": "project_type_National Data Center",
+      "feature_value": "N/A",
+      "shap_value": 0.001124932081438601,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_type_Recommendation",
+      "feature_label": "ai_type_Recommendation",
+      "feature_value": "N/A",
+      "shap_value": 0.000968762265983969,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "budget_sufficiency",
+      "feature_label": "Budget Sufficiency",
+      "feature_value": "0.95",
+      "shap_value": 0.0009090458624996245,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "frontend_framework_Next.js",
+      "feature_label": "frontend_framework_Next.js",
+      "feature_value": "N/A",
+      "shap_value": 0.0009066263446584344,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Settat",
+      "feature_label": "province_Settat",
+      "feature_value": "N/A",
+      "shap_value": 0.0009023072198033333,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_Cybersecurity",
+      "feature_label": "digital_service_Cybersecurity",
+      "feature_value": "N/A",
+      "shap_value": -0.0008894166676327586,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_K\u00e9nitra",
+      "feature_label": "province_K\u00e9nitra",
+      "feature_value": "N/A",
+      "shap_value": -0.0008728781249374151,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Taza",
+      "feature_label": "province_Taza",
+      "feature_value": "N/A",
+      "shap_value": 0.0008619712316431105,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "frontend_framework_Vue.js",
+      "feature_label": "frontend_framework_Vue.js",
+      "feature_value": "N/A",
+      "shap_value": -0.0007598516531288624,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "ai_type_Decision Support",
+      "feature_label": "ai_type_Decision Support",
+      "feature_value": "N/A",
+      "shap_value": 0.0007526244153268635,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_Document Management",
+      "feature_label": "digital_service_Document Management",
+      "feature_value": "N/A",
+      "shap_value": -0.0006755921058356762,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Tanger",
+      "feature_label": "province_Tanger",
+      "feature_value": "N/A",
+      "shap_value": 0.0006712240865454078,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "ai_type_NLP",
+      "feature_label": "ai_type_NLP",
+      "feature_value": "N/A",
+      "shap_value": 0.0006207838887348771,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "security_audit_score",
+      "feature_label": "Security Score",
+      "feature_value": "92",
+      "shap_value": -0.0005700442707166076,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Marrakech",
+      "feature_label": "province_Marrakech",
+      "feature_value": "N/A",
+      "shap_value": -0.0005503902211785316,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Government Cloud Migration",
+      "feature_label": "project_type_Government Cloud Migration",
+      "feature_value": "N/A",
+      "shap_value": -0.000532612088136375,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "frontend_framework_Flutter",
+      "feature_label": "frontend_framework_Flutter",
+      "feature_value": "N/A",
+      "shap_value": -0.0005293578724376857,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_F\u00e8s",
+      "feature_label": "province_F\u00e8s",
+      "feature_value": "N/A",
+      "shap_value": 0.0004329790535848588,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "iso27001_Yes",
+      "feature_label": "ISO27001: ISO27001 Certified",
+      "feature_value": "Yes",
+      "shap_value": 0.0003562999772839248,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_Digital Health",
+      "feature_label": "digital_service_Digital Health",
+      "feature_value": "N/A",
+      "shap_value": -0.0003167868999298662,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_Digital Education",
+      "feature_label": "digital_service_Digital Education",
+      "feature_value": "N/A",
+      "shap_value": 0.00023885484552010894,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Sidi Kacem",
+      "feature_label": "province_Sidi Kacem",
+      "feature_value": "N/A",
+      "shap_value": 0.0002183969336329028,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "digital_service_Fintech",
+      "feature_label": "digital_service_Fintech",
+      "feature_value": "N/A",
+      "shap_value": -0.00020803642109967768,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "project_type_Cybersecurity Infrastructure",
+      "feature_label": "project_type_Cybersecurity Infrastructure",
+      "feature_value": "N/A",
+      "shap_value": 0.00020005540864076465,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "project_type_Digital Tax Platform",
+      "feature_label": "project_type_Digital Tax Platform",
+      "feature_value": "N/A",
+      "shap_value": 0.00016805270570330322,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "gdpr_compliance_Yes",
+      "feature_label": "GDPR Compliance: GDPR Compliant",
+      "feature_value": "Yes",
+      "shap_value": -0.00016140687512233853,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "cloud_provider_Hybrid",
+      "feature_label": "cloud_provider_Hybrid",
+      "feature_value": "N/A",
+      "shap_value": -0.00016005616635084152,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "frontend_framework_React Native",
+      "feature_label": "frontend_framework_React Native",
+      "feature_value": "N/A",
+      "shap_value": -0.00010846076474990696,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "digital_service_AI/ML",
+      "feature_label": "digital_service_AI/ML",
+      "feature_value": "N/A",
+      "shap_value": -8.162852464010939e-05,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "database_SQL Server",
+      "feature_label": "database_SQL Server",
+      "feature_value": "N/A",
+      "shap_value": 7.902912329882383e-05,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "province_Rabat",
+      "feature_label": "province_Rabat",
+      "feature_value": "N/A",
+      "shap_value": 7.835829455871135e-05,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "database_MongoDB",
+      "feature_label": "database_MongoDB",
+      "feature_value": "N/A",
+      "shap_value": 7.688166078878567e-05,
+      "impact": "supports",
+      "impact_type": "positive",
+      "icon": "\u2705"
+    },
+    {
+      "feature": "database_Cassandra",
+      "feature_label": "database_Cassandra",
+      "feature_value": "N/A",
+      "shap_value": -7.251517672557384e-05,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Nouaceur",
+      "feature_label": "province: Nouaceur",
+      "feature_value": "Casablanca",
+      "shap_value": -5.4636166169075295e-05,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "province_Ifrane",
+      "feature_label": "province_Ifrane",
+      "feature_value": "N/A",
+      "shap_value": -5.2243529353290796e-05,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "software_complexity_ordinal",
+      "feature_label": "Software Complexity",
+      "feature_value": "High",
+      "shap_value": 0.0,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    },
+    {
+      "feature": "cybersecurity_level_ordinal",
+      "feature_label": "Cybersecurity Level",
+      "feature_value": "High",
+      "shap_value": 0.0,
+      "impact": "opposes",
+      "impact_type": "negative",
+      "icon": "\u26a0\ufe0f"
+    }
+  ],
+  "digital_insights": {
+    "digital_maturity": {
+      "feature": "Digital Maturity Index",
+      "value": "N/A",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    "security_readiness": null,
+    "integration_complexity": null,
+    "team_capability": {
+      "feature": "Team Capability",
+      "value": "N/A",
+      "impact": "supports",
+      "icon": "\u2705"
+    },
+    "ai_readiness": {
+      "feature": "AI Maturity",
+      "value": "0.70",
+      "impact": "opposes",
+      "icon": "\u26a0\ufe0f"
+    }
+  }
+}

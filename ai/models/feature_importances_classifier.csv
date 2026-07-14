@@ -1,0 +1,152 @@
+feature,importance
+ai_component_Yes,0.06546314
+ai_component_No,0.058200315
+legacy_systems,0.032916117
+complexity_score,0.028222276
+integration_complexity_ordinal,0.024610503
+ai_type_nan,0.024239331
+digital_skill_score,0.02361547
+security_maturity,0.019877054
+integration_burden,0.01801682
+project_type_AI Chatbot for Public Services,0.016405568
+software_complexity_ordinal,0.016284598
+digital_maturity_index,0.015470146
+cybersecurity_level_ordinal,0.014418166
+security_audit_score,0.014132685
+vendor_experience,0.012927113
+project_type_Digital Education Platform,0.012067906
+cloud_provider_On-Premise,0.011865921
+project_type_Smart Municipality Platform,0.011319973
+ai_maturity,0.011137991
+project_type_e-Government Portal,0.011084165
+project_type_Smart Citizen Services Platform,0.010402918
+project_type_Digital Health Records,0.010052176
+digital_maturity,0.009509575
+scrum_maturity_ordinal,0.008905326
+ai_readiness,0.008487398
+project_type_Online Business Registration,0.008183541
+quality_score,0.008130002
+project_type_Digital Signature System,0.0080009885
+project_type_Open Data Platform,0.007919996
+project_type_National Digital Identity,0.007830222
+project_type_Smart Agriculture Platform,0.007367106
+province_Meknès,0.0071863486
+team_capability,0.007181157
+compliance_score,0.0071508326
+project_type_Digital Tax Platform,0.0069436748
+api_count,0.006205289
+province_Nouaceur,0.0060103964
+project_type_Digital Procurement Platform,0.0060003796
+vulnerabilities_found,0.0058794054
+staff_turnover,0.005809106
+region_Casablanca-Settat,0.0055372263
+project_type_Electronic Document Management,0.0055324957
+project_type_Government Cloud Migration,0.005374355
+province_Tétouan,0.005194106
+testing_coverage,0.0051839347
+province_Kénitra,0.005141124
+digital_service_Mobile Services,0.005032376
+province_Settat,0.0049722097
+digital_service_Smart City,0.0049363906
+cloud_provider_AWS,0.004823811
+backend_framework_ASP.NET Core,0.004772417
+ai_type_Predictive Analytics,0.004541722
+project_type_National Data Center,0.0043672714
+frontend_framework_Flutter,0.004345304
+province_Al Hoceïma,0.0043417783
+province_Larache,0.004327715
+interoperability_score,0.00429986
+ai_type_Chatbot,0.004293944
+province_Chichaoua,0.004242691
+backend_framework_Node.js,0.00423757
+province_Mohammedia,0.004222573
+province_Safi,0.004130904
+change_requests,0.0040974994
+senior_developers,0.0040782155
+ai_type_Recommendation,0.0040754783
+region_Fès-Meknès,0.0040327157
+database_SQL Server,0.004008358
+planned_duration_days,0.003988524
+digital_service_Digital Signature,0.003976971
+digital_service_Digital Education,0.0039594225
+ai_type_NLP,0.0039458796
+funding_source_Mixed,0.0039303517
+penetration_testing_No,0.0039114268
+province_Ifrane,0.0039085266
+database_Cassandra,0.003903553
+penetration_testing_Yes,0.0038477401
+province_Salé,0.0038409971
+database_MySQL,0.003789357
+province_Rabat,0.0037871236
+procurement_delay_days,0.0037683547
+audit_findings,0.003761498
+planned_budget_mad,0.0037523222
+frontend_framework_Vue.js,0.0037323916
+project_type_Cybersecurity Infrastructure,0.0037151936
+backend_framework_FastAPI,0.0036701625
+backend_framework_Django,0.0036618926
+encryption_level_Basic,0.003653891
+funding_source_International Grant,0.0036475714
+approval_delay_days,0.003633624
+digital_service_Document Management,0.0036289184
+province_Fès,0.0035791486
+digital_adoption_rate,0.003550147
+budget_efficiency,0.0035418528
+region_Marrakech-Safi,0.0035365368
+team_size,0.0035315119
+province_Tanger,0.0034997237
+digital_service_Digital Identity,0.003471299
+citizen_engagement,0.003458338
+cloud_provider_Hybrid,0.0034357384
+system_availability_target,0.003426838
+digital_service_IoT,0.0033950494
+digital_service_Digital Health,0.0033923227
+funding_source_National Budget,0.0033590791
+budget_sufficiency,0.0033501768
+region_Tanger-Tétouan-Al Hoceïma,0.0033435072
+expected_transactions,0.0033426827
+user_training,0.00334252
+digital_service_Cybersecurity,0.003342488
+digital_service_AI/ML,0.0033390045
+frontend_framework_Angular,0.0033264128
+cloud_provider_Oracle Cloud,0.0032976582
+total_delay_days,0.003295454
+frontend_framework_React,0.0032834345
+backend_framework_Spring Boot,0.0032739153
+frontend_framework_Next.js,0.003268669
+digital_service_Data Analytics,0.0032620293
+gdpr_compliance_No,0.0032484622
+digital_service_Open Data,0.0032338994
+microservices_No,0.0032330886
+province_Al Haouz,0.0032329848
+frontend_framework_React Native,0.003224861
+ai_type_Computer Vision,0.003215076
+digital_service_eGovernment,0.00320137
+funding_source_Public-Private Partnership,0.0031990192
+iso27001_Yes,0.0031979731
+project_priority_ordinal,0.0031966746
+backend_framework_Laravel,0.0031775283
+citizen_users,0.0031765765
+encryption_level_Military Grade,0.003176286
+digital_service_Cloud Services,0.0031566042
+region_Rabat-Salé-Kénitra,0.0031379086
+database_MongoDB,0.00311307
+strategic_importance_ordinal,0.0030859727
+province_Casablanca,0.003079017
+cloud_provider_Azure,0.0030787468
+chatbot_usage_ordinal,0.0030218568
+province_Sidi Kacem,0.0029815426
+cloud_provider_Google Cloud,0.0029289767
+gdpr_compliance_Yes,0.0028954926
+citizen_complaints,0.002880321
+microservices_Yes,0.0028699113
+ai_type_Decision Support,0.0028515263
+database_Oracle,0.0028512722
+iso27001_No,0.0028364458
+encryption_level_Strong,0.0028296334
+province_Marrakech,0.0028292977
+database_PostgreSQL,0.0027498747
+digital_service_Fintech,0.002605077
+province_Taza,0.0025663336
+digital_service_Blockchain,0.0025551226
+encryption_level_nan,0.0021458426
