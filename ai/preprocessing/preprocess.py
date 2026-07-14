@@ -1,35 +1,4 @@
-"""
-preprocess.py - Data preprocessing for digital transformation projects
-Ministry of Digital Transition and Administration Reform - Morocco
 
-CHANGELOG (this version):
-  - CRITICAL FIX: 'risk_score' and 'budget_overrun_rate' were not excluded from
-    feature_cols (only the four *_targets* were), so they leaked straight into the
-    training features -- the same bug already fixed in train_model.py. Added an
-    explicit LEAKAGE_COLUMNS list and drop it before feature_cols is computed.
-  - CRITICAL FIX: _create_features() injected np.random.uniform(...) as the
-    'cloud_readiness' feature. This ran at BOTH training and inference time
-    (prepare_features() calls _create_features()), meaning the same project sent
-    to the API twice would get a different feature value and a different
-    prediction each time. Replaced with a deterministic formula.
-  - FIX: pipeline order was encode -> scale -> engineer_features. Several engineered
-    features (digital_maturity_index, ai_readiness, quality_score, budget_efficiency,
-    citizen_engagement) assume raw 0-100 / raw-MAD inputs, but scaling ran first,
-    so they were being computed on standardized (mean ~0, possibly negative) values.
-    Reordered to encode -> engineer_features (on raw values) -> scale (raw numeric
-    columns only; engineered columns are already roughly bounded by design and are
-    left unscaled intentionally).
-  - Ordinal columns (software_complexity, integration_complexity, project_priority,
-    strategic_importance, cybersecurity_level, scrum_maturity, chatbot_usage) are now
-    encoded with an explicit, meaning-preserving integer map (matching
-    ORDINAL_COLUMNS in train_model.py) instead of an arbitrary alphabetical
-    LabelEncoder, which had no guarantee of preserving Low < Medium < High order.
-  - NOTE: this pipeline is NOT what train_model.py actually trains on (that script
-    has its own independent build_xy()/ColumnTransformer and saves
-    'preprocessor.joblib'). If you serve predictions, use RiskExplainer
-    (shap_explainer.py) / preprocessor.joblib, not this class, or you will get
-    silently wrong predictions from a feature representation the model never saw.
-"""
 
 import pandas as pd
 import numpy as np
@@ -42,14 +11,8 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from config import *
 
-# Columns that are OUTCOMES and must never be used as model inputs (target leakage).
-# Kept in sync with LEAKAGE_COLUMNS in train_model.py.
 LEAKAGE_COLUMNS = ['risk_score', 'budget_overrun_rate']
 
-# Ordinal columns with a meaningful order -> encoded as integers, NOT via LabelEncoder
-# (which sorts alphabetically and would silently break the Low < Medium < High
-# relationship, e.g. 'Critical' < 'High' < 'Low' < 'Medium' alphabetically).
-# Kept in sync with ORDINAL_COLUMNS in train_model.py.
 ORDINAL_COLUMNS = {
     'software_complexity': {'Low': 0, 'Medium': 1, 'High': 2, 'Very High': 3},
     'integration_complexity': {'Low': 0, 'Medium': 1, 'High': 2, 'Very High': 3},
@@ -59,9 +22,6 @@ ORDINAL_COLUMNS = {
     'scrum_maturity': {'Low': 0, 'Medium': 1, 'High': 2},
     'chatbot_usage': {'Low': 0, 'Medium': 1, 'High': 2},
 }
-
-# Nominal (unordered) categorical columns -> LabelEncoder is fine here since there's
-# no ordering to preserve.
 NOMINAL_COLUMNS = [
     'project_type', 'digital_service', 'region', 'province',
     'cloud_migration', 'cloud_provider', 'frontend_framework', 'backend_framework',
@@ -69,7 +29,6 @@ NOMINAL_COLUMNS = [
     'penetration_testing', 'ai_component', 'ai_type', 'microservices', 'funding_source',
 ]
 
-# Full categorical list (ordinal + nominal), used for missing-value handling only.
 ALL_CATEGORICAL_COLUMNS = list(ORDINAL_COLUMNS.keys()) + NOMINAL_COLUMNS
 
 
@@ -166,9 +125,7 @@ class DataPreprocessor:
 
         Nominal columns use LabelEncoder since there's no order to preserve.
         """
-        # Ordinal: explicit mapping, always the same regardless of what values are
-        # present in this particular dataframe (unlike LabelEncoder, which depends
-        # on np.unique() of whatever's present).
+        
         for col, mapping in ORDINAL_COLUMNS.items():
             if col in data.columns:
                 data[col + '_encoded'] = data[col].map(mapping)
@@ -230,11 +187,7 @@ class DataPreprocessor:
                 0
             )
 
-        # Cloud readiness: deterministic function of migration status + digital
-        # maturity / interoperability, instead of the previous np.random.uniform()
-        # call (which made this feature -- and therefore every downstream
-        # prediction -- non-reproducible: the same project would score differently
-        # on every single call, at both training and inference time).
+       
         if 'cloud_migration_encoded' in data.columns:
             maturity_component = data['digital_maturity'] if 'digital_maturity' in data.columns else 0.5
             interop_component = (data['interoperability_score'] / 100) if 'interoperability_score' in data.columns else 0.5
@@ -290,9 +243,7 @@ class DataPreprocessor:
             data['budget_efficiency'] = data['budget_sufficiency'] / (1 + data['planned_budget_mad'] / 100_000_000)
             data['budget_efficiency'] = data['budget_efficiency'].clip(0, 1)
 
-        # Risk-adjusted success probability (normalized copy, kept for reference /
-        # dashboards only -- 'success_probability' itself stays in target_cols and
-        # is never used as a feature).
+       
         if 'success_probability' in data.columns:
             data['success_probability_norm'] = data['success_probability'] / 100
 
