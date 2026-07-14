@@ -1,27 +1,3 @@
-"""
-train_model.py - Digital Transformation Risk Classification Model Trainer
-Trains an XGBoost model on the digital transformation project dataset to predict
-`risk_level` (Low / Medium / High) and `success_probability` (regression),
-computes SHAP explainability artifacts, and saves everything for the FastAPI backend.
-
-USAGE:
-    python train_model.py
-    python train_model.py --data ../data/ministry_projects.csv --tune
-
-CHANGELOG (this version):
-  - Fixed double-encoding bug: ordinal columns (software_complexity, integration_complexity,
-    project_priority, strategic_importance, cybersecurity_level, scrum_maturity,
-    chatbot_usage) were previously BOTH one-hot encoded AND ordinal-encoded, diluting
-    feature importance / SHAP attribution across two representations of the same signal.
-    They are now encoded ONLY as ordinal integers.
-  - Added scrum_maturity, chatbot_usage, funding_source (now actually generated upstream
-    in generate_synthetic_data.py) to the categorical/ordinal column lists.
-  - Added monotonic constraints to the XGBoost classifier for features with an
-    unambiguous risk direction, so SHAP explanations can't show a counter-intuitive
-    "more testing coverage -> higher risk" artifact from noise.
-  - Regression predictions are now clipped to [0, 100] at evaluation time to match the
-    bounded nature of success_probability in the training data.
-"""
 
 import argparse
 import json
@@ -59,9 +35,7 @@ LEAKAGE_COLUMNS = [
 # Identifier / non-predictive columns.
 ID_COLUMNS = ["project_id", "project_name", "ministry", "sector"]
 
-# Nominal (unordered) categorical columns -> one-hot encode.
-# NOTE: ordinal columns (below) are intentionally NOT listed here anymore -- encoding
-# the same variable both ways dilutes SHAP attribution across two representations.
+
 CATEGORICAL_COLUMNS = [
     "project_type", "digital_service", "region", "province",
     "frontend_framework", "backend_framework", "database", "cloud_provider",
@@ -69,7 +43,6 @@ CATEGORICAL_COLUMNS = [
     "ai_component", "ai_type", "microservices", "funding_source",
 ]
 
-# Ordinal columns that should be encoded as integers ONLY (not also one-hot encoded).
 ORDINAL_COLUMNS = {
     'software_complexity': {'Low': 0, 'Medium': 1, 'High': 2, 'Very High': 3},
     'integration_complexity': {'Low': 0, 'Medium': 1, 'High': 2, 'Very High': 3},
@@ -80,9 +53,6 @@ ORDINAL_COLUMNS = {
     'chatbot_usage': {'Low': 0, 'Medium': 1, 'High': 2},
 }
 
-# Monotonic direction for numeric/ordinal features with an unambiguous relationship to
-# risk (1 = increasing this feature can only increase predicted risk, -1 = can only
-# decrease it, 0/unlisted = unconstrained). Applied only to the classifier.
 MONOTONIC_DIRECTIONS = {
     'testing_coverage': -1,
     'vendor_experience': -1,
@@ -106,7 +76,7 @@ MONOTONIC_DIRECTIONS = {
 }
 
 TARGET_COLUMN = "risk_level"
-RISK_ORDER = ["Low", "Medium", "High"]  # fixes label_encoder.classes_ order
+RISK_ORDER = ["Low", "Medium", "High"]  
 SUCCESS_TARGET = "success_probability"
 
 RANDOM_STATE = 42
