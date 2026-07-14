@@ -1,15 +1,4 @@
-"""
-shap_explainer.py - Optimized SHAP explanations for the Smart Ministry Platform
 
-CHANGELOG (this version):
-  - Fixed @lru_cache on an instance method (_get_feature_label_cached), which kept a
-    strong reference to `self` inside the cache forever. Replaced with a module-level
-    cache keyed only on feature_name.
-  - Prediction cache is now a bounded OrderedDict (LRU eviction) using the previously
-    unused `cache_size` constructor argument, instead of an unbounded plain dict.
-  - Regressor-style outputs (if a success-probability model is ever wired into this
-    explainer) should be clipped to [0, 100]; noted where relevant.
-"""
 
 import shap
 import pandas as pd
@@ -157,12 +146,6 @@ ORDINAL_MAPPINGS = {
 }
 
 
-# ===============================
-# Module-level (not bound to `self`) cached label lookup.
-# A plain @lru_cache on an instance method keeps every instance of the class alive for
-# the lifetime of the cache, since the cache key includes `self`. Keeping this as a
-# free function keyed only on feature_name avoids that leak entirely.
-# ===============================
 @lru_cache(maxsize=256)
 def _feature_label_lookup(feature_name: str) -> str:
     clean_name = feature_name.replace('_ordinal', '')
